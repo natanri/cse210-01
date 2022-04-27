@@ -1,11 +1,14 @@
 import random
 from turtle import position
 
-board = ["-", "-" , "-",
-       "-", "-", "-",
-       "-", "-", "-"]
+#TIC TAC TOE assignment
+#Jhonatan Rios
 
-Player = ""
+board = ["1", "2" , "3",
+       "4", "5", "6",
+       "7", "8", "9"]
+
+Player = "x"
 winner = None
 gameRun = True
 
@@ -13,20 +16,23 @@ gameRun = True
 # print the game board
 
 def print_board(board):
+    print()
     print(board[0] + " | " + board[1] + " | " + board[2])
     print("+-+-+-+-+")
     print(board[3] + " | " + board[4] + " | " + board[5])
     print("+-+-+-+-+")
     print(board[6] + " | " + board[7] + " | " + board[8])
+    print()
 
 
 
 #taking player input
 
 def playerInp(board):
-    num = int(input("Enter a number 1-9: "))
-    if num >= 1 and num <= 9 and board[num-1] == "-":
+    num = int(input(f"{Player}'s turn to choose a square buddy (1-9): "))
+    if num >= 1 and num <= 9 and board[num-1] == "1" or"2" or "3" or "4" or "5" or "6" or "7" or "8" or "9":
         board[num-1] = Player
+        
     else:
         print("Oops player is already in that spot!")
 
@@ -65,29 +71,26 @@ def checkIfWinner(board):
     if check_winner(board):
         print_board(board)
         print(f"The winner is {winner}!")
+        print("Good game. Thanks for playing!")
         gameRun = False
 
-def Player2(current):
-    if current == "" or current == "o":
-        return "x"
+def Player1():
+    global Player
+    if Player == "x":
+        Player = "o"
       
-    elif current == "x":
-        return "o"
+    else:
+        Player = "x"
 
-def computer(board):
-    while Player == "o":
-        position = random.randint(0, 8)
-        if board[position] == "-":
-            board[position] = "o"
-            Player2()
-    
 
-#
+
+#Run the game calling functions
 
 while gameRun:
     print_board(board)
     playerInp(board)
     check_winner(board)
     checkIfWinner(board)
-    Player2()
-    computer(board)
+    Player1()
+    
+    
